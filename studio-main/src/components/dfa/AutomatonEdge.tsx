@@ -2,6 +2,15 @@ import React from 'react';
 import { EdgeProps, getBezierPath, EdgeLabelRenderer, getSimpleBezierPath } from 'reactflow';
 import { cn } from '@/lib/utils';
 
+interface AutomatonEdgeData {
+  curvature?: number;
+}
+
+type AutomatonEdgeProps = EdgeProps & {
+  data?: AutomatonEdgeData;
+  className?: string;
+};
+
 export function AutomatonEdge({
   id,
   sourceX,
@@ -16,7 +25,7 @@ export function AutomatonEdge({
   animated,
   className,
   data,
-}: EdgeProps) {
+}: AutomatonEdgeProps) {
   const isSelfLoop = sourceX === targetX && sourceY === targetY;
   const curvature = data?.curvature || 0;
   

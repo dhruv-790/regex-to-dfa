@@ -80,7 +80,7 @@ export function DfaGraph({ states, currentStep, nodes, edges, onNodesChange, onE
         snapToGrid
         snapGrid={[15, 15]}
       >
-        <Background color="#26D94C" opacity={0.05} gap={20} />
+        <Background color="#26D94C" gap={20} style={{ opacity: 0.05 }} />
         <Controls className="fill-primary" />
         <MiniMap 
           nodeColor={(n) => n.data?.isActive ? '#26D94C' : '#BA4CFF'} 
