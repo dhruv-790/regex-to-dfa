@@ -12,8 +12,9 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
-import { Info, Menu } from 'lucide-react';
+import { Info, Menu, X } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { useResponsive } from '@/hooks/use-responsive';
 
 const initialStates: DfaState[] = [
   { id: 'q0', type: 'initial', label: 'Start' },
@@ -71,6 +72,7 @@ const initialEdges: Edge[] = groupTransitionsToEdges(initialTransitions);
 
 export default function AutomatonFlowPage() {
   const { toast } = useToast();
+  const responsive = useResponsive();
   const [isMounted, setIsMounted] = useState(false);
   const [states, setStates] = useState<DfaState[]>(initialStates);
   const [transitions, setTransitions] = useState<DfaTransition[]>(initialTransitions);

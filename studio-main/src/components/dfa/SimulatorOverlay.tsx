@@ -63,10 +63,10 @@ export function SimulatorOverlay({
             </div>
 
             <div className="flex items-center gap-1 md:gap-2">
-              <Button variant="outline" size="sm" onClick={onReset} title="Reset Simulation" className="border-border hover:text-primary h-8 w-8 md:h-10 md:w-10 p-0 md:p-1">
+              <Button variant="outline" size="sm" onClick={onReset} title="Reset Simulation" className="border-border hover:text-primary min-h-11 sm:h-8 md:h-10 min-w-11 sm:w-8 md:w-10 p-0 md:p-1 touch-friendly">
                 <RefreshCw className="w-3 md:w-4 h-3 md:h-4" />
               </Button>
-              <Button variant="outline" size="sm" onClick={onStepBackward} disabled={!currentStep || currentStep.stepIndex === 0} title="Step Backward" className="border-border hover:text-primary h-8 w-8 md:h-10 md:w-10 p-0 md:p-1">
+              <Button variant="outline" size="sm" onClick={onStepBackward} disabled={!currentStep || currentStep.stepIndex === 0} title="Step Backward" className="border-border hover:text-primary min-h-11 sm:h-8 md:h-10 min-w-11 sm:w-8 md:w-10 p-0 md:p-1 touch-friendly">
                 <SkipBack className="w-3 md:w-4 h-3 md:h-4" />
               </Button>
               <Button 
@@ -74,16 +74,16 @@ export function SimulatorOverlay({
                 size="sm" 
                 onClick={onTogglePlay}
                 title={isPlaying ? "Pause" : "Play"}
-                className={cn(!isPlaying && "bg-primary text-primary-foreground hover:bg-primary/90", "h-8 w-8 md:h-10 md:w-10 p-0 md:p-1")}
+                className={cn(!isPlaying && "bg-primary text-primary-foreground hover:bg-primary/90", "min-h-11 sm:h-8 md:h-10 min-w-11 sm:w-8 md:w-10 p-0 md:p-1 touch-friendly")}
               >
                 {isPlaying ? <Pause className="w-3 md:w-4 h-3 md:h-4" /> : <Play className="w-3 md:w-4 h-3 md:h-4 ml-0.5" />}
               </Button>
-              <Button variant="outline" size="sm" onClick={onStepForward} disabled={remaining.length === 0} title="Step Forward" className="border-border hover:text-primary h-8 w-8 md:h-10 md:w-10 p-0 md:p-1">
+              <Button variant="outline" size="sm" onClick={onStepForward} disabled={remaining.length === 0} title="Step Forward" className="border-border hover:text-primary min-h-11 sm:h-8 md:h-10 min-w-11 sm:w-8 md:w-10 p-0 md:p-1 touch-friendly">
                 <SkipForward className="w-3 md:w-4 h-3 md:h-4" />
               </Button>
               <Button 
                 onClick={onExplain} 
-                className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold text-xs md:text-sm h-8 md:h-10 px-2 md:px-3 py-1 md:py-2"
+                className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold text-xs md:text-sm min-h-11 md:min-h-10 px-3 md:px-3 py-2 md:py-2 touch-friendly"
                 disabled={isProcessing}
               >
                 <Info className="w-3 md:w-4 h-3 md:h-4 mr-1" /> <span className="hidden md:inline">Trace Report</span><span className="md:hidden">Info</span>

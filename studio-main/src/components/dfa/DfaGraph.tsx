@@ -68,7 +68,7 @@ export function DfaGraph({ states, currentStep, nodes, edges, onNodesChange, onE
   }, [edges, activeStateId, lastSourceId, lastChar]);
 
   return (
-    <div className="w-full h-full bg-background relative">
+    <div className="w-full h-full bg-background relative overflow-hidden">
       <ReactFlow
         nodes={rfNodes}
         edges={rfEdges}
@@ -79,9 +79,11 @@ export function DfaGraph({ states, currentStep, nodes, edges, onNodesChange, onE
         fitView
         snapToGrid
         snapGrid={[15, 15]}
+        minZoom={0.5}
+        maxZoom={2}
       >
         <Background color="#26D94C" gap={20} style={{ opacity: 0.05 }} />
-        <Controls className="fill-primary" />
+        <Controls className="fill-primary [&>button]:touch-friendly [&>button]:min-h-10 [&>button]:min-w-10" />
         <div className="hidden md:block">
           <MiniMap 
             nodeColor={(n) => n.data?.isActive ? '#26D94C' : '#BA4CFF'} 

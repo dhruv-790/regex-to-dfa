@@ -74,12 +74,12 @@ export function DfaEditor({
                 placeholder="(a|b)*abb" 
                 value={regex} 
                 onChange={e => setRegex(e.target.value)}
-                className="font-code text-secondary text-xs md:text-sm"
+                className="font-code text-secondary text-xs md:text-sm focus:ring-2"
               />
               <p className="text-[8px] md:text-[10px] text-muted-foreground">a, b, |, *, +, ?, ( )</p>
             </div>
             <Button 
-              className="w-full bg-secondary hover:bg-secondary/80 text-white font-bold text-xs md:text-sm" 
+              className="w-full bg-secondary hover:bg-secondary/80 text-white font-bold text-xs md:text-sm min-h-10 md:min-h-11 touch-friendly" 
               onClick={() => onRegexConvert(regex)}
             >
               Generate DFA
@@ -118,7 +118,7 @@ export function DfaEditor({
                 </SelectContent>
               </Select>
             </div>
-            <Button className="w-full bg-primary hover:bg-primary/80 text-primary-foreground text-xs md:text-sm" onClick={handleAddState}>
+            <Button className="w-full bg-primary hover:bg-primary/80 text-primary-foreground text-xs md:text-sm min-h-10 md:min-h-11 touch-friendly" onClick={handleAddState}>
               <Plus className="w-3 md:w-4 h-3 md:h-4 mr-1" /> Add
             </Button>
           </CardContent>
@@ -169,7 +169,7 @@ export function DfaEditor({
               <Label htmlFor="ts" className="text-xs md:text-sm">Symbol (a or b)</Label>
               <Input id="ts" maxLength={1} placeholder="a" value={tSymbol} onChange={e => setTSymbol(e.target.value.toLowerCase())} className="text-xs md:text-sm" />
             </div>
-            <Button className="w-full bg-accent hover:bg-accent/80 text-white text-xs md:text-sm" onClick={handleAddTransition}>
+            <Button className="w-full bg-accent hover:bg-accent/80 text-white text-xs md:text-sm min-h-10 md:min-h-11 touch-friendly" onClick={handleAddTransition}>
               <Plus className="w-3 md:w-4 h-3 md:h-4 mr-1" /> Add
             </Button>
           </CardContent>
