@@ -9,8 +9,10 @@ import { DfaState, DfaTransition, ProcessingStep } from '@/lib/dfa-types';
 import { generateDfaExplanation } from '@/lib/dfa-engine';
 import { convertRegexToDfa } from '@/lib/regex-to-dfa';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Info } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Info, Menu } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const initialStates: DfaState[] = [
@@ -82,6 +84,7 @@ export default function AutomatonFlowPage() {
   const [isExplanationOpen, setIsExplanationOpen] = useState(false);
   const [explanation, setExplanation] = useState('');
   const [simulationAccepted, setSimulationAccepted] = useState<boolean | null>(null);
+  const [isEditorDrawerOpen, setIsEditorDrawerOpen] = useState(false);
 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -243,33 +246,44 @@ export default function AutomatonFlowPage() {
   }
 
   return (
-    <div className="flex h-screen w-screen bg-background overflow-hidden">
-      <DfaEditor 
-        states={states}
-        transitions={transitions}
-        onAddState={handleAddState}
-        onAddTransition={handleAddTransition}
-        onDeleteState={handleDeleteState}
-        onDeleteTransition={handleDeleteTransition}
-        onRegexConvert={handleRegexConvert}
-      />
+    <div className="flex flex-col lg:flex-row h-screen w-screen bg-background overflow-hidden">
+      <div className="hidden lg:block lg:w-96 overflow-y-auto border-r border-border">
+        <DfaEditor 
+          states={states}
+          transitions={transitions}
+          onAddState={handleAddState}
+          onAddTransition={handleAddTransition}
+          onDeleteState={handleDeleteState}
+          onDeleteTransition={handleDeleteTransition}
+          onRegexConvert={handleRegexConvert}
+        />
+      </div>
 
-      <main className="flex-1 relative flex flex-col">
-        <header className="flex items-center justify-between p-4 border-b border-border bg-sidebar/50 backdrop-blur-sm z-10">
-          <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-headline font-bold text-primary tracking-tight">
+      <main className="flex-1 relative flex flex-col min-h-0">
+        <header className="flex flex-col md:flex-row md:items-center md:justify-between p-2 md:p-4 border-b border-border bg-sidebar/50 backdrop-blur-sm z-10 gap-2">
+          <div className="flex items-center gap-2 justify-between lg:justify-start">
+            <h1 className="text-lg md:text-2xl font-headline font-bold text-primary tracking-tight">
               DFA Studio
             </h1>
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="lg:hidden"
+              onClick={() => setIsEditorDrawerOpen(true)}
+              title="Open DFA Editor"
+            >
+              <Menu className="w-5 h-5" />
+            </Button>
           </div>
-          <div className="flex items-center gap-4 text-xs font-medium text-muted-foreground uppercase tracking-widest">
-            <span className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-primary" /> Start State
+          <div className="hidden md:flex items-center gap-2 lg:gap-4 text-[10px] md:text-xs font-medium text-muted-foreground uppercase tracking-widest">
+            <span className="flex items-center gap-1">
+              <span className="w-2 h-2 rounded-full bg-primary" /> Start
             </span>
-            <span className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-secondary" /> Processing
+            <span className="flex items-center gap-1">
+              <span className="w-2 h-2 rounded-full bg-secondary" /> Process
             </span>
-            <span className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full border-2 border-primary" /> Final State
+            <span className="flex items-center gap-1">
+              <span className="w-2 h-2 rounded-full border-2 border-primary" /> Final
             </span>
           </div>
         </header>
@@ -338,6 +352,25 @@ export default function AutomatonFlowPage() {
           </div>
         </DialogContent>
       </Dialog>
+
+      <Sheet open={isEditorDrawerOpen} onOpenChange={setIsEditorDrawerOpen}>
+        <SheetContent side="left" className="w-[300px] sm:w-[400px] bg-sidebar border-r border-border p-0 overflow-y-auto">
+          <SheetHeader className="border-b border-border p-4">
+            <SheetTitle className="text-primary">DFA Editor</SheetTitle>
+          </SheetHeader>
+          <div className="p-4">
+            <DfaEditor 
+              states={states}
+              transitions={transitions}
+              onAddState={handleAddState}
+              onAddTransition={handleAddTransition}
+              onDeleteState={handleDeleteState}
+              onDeleteTransition={handleDeleteTransition}
+              onRegexConvert={handleRegexConvert}
+            />
+          </div>
+        </SheetContent>
+      </Sheet>
     </div>
   );
 }

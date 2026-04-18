@@ -54,32 +54,32 @@ export function DfaEditor({
   };
 
   return (
-    <div className="flex flex-col gap-6 w-full max-w-sm h-full overflow-y-auto p-4 bg-sidebar border-r border-border custom-scrollbar">
+    <div className="flex flex-col gap-4 md:gap-6 w-full h-full overflow-y-auto p-3 md:p-4 bg-sidebar custom-scrollbar">
       <div className="flex items-center gap-2 mb-2">
-        <Settings2 className="w-5 h-5 text-primary" />
-        <h2 className="text-xl font-headline font-bold text-primary">DFA Definition</h2>
+        <Settings2 className="w-4 md:w-5 h-4 md:h-5 text-primary" />
+        <h2 className="text-base md:text-xl font-headline font-bold text-primary">DFA Definition</h2>
       </div>
 
-      <section className="space-y-4">
+      <section className="space-y-3 md:space-y-4">
         <div className="flex items-center justify-between">
-          <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Regex to DFA</h3>
-          <Sparkles className="w-3.5 h-3.5 text-secondary animate-pulse" />
+          <h3 className="text-xs md:text-sm font-semibold text-muted-foreground uppercase tracking-wider">Regex to DFA</h3>
+          <Sparkles className="w-3 md:w-3.5 h-3 md:h-3.5 text-secondary animate-pulse" />
         </div>
         <Card className="bg-secondary/5 border-secondary/20">
-          <CardContent className="pt-4 space-y-3">
+          <CardContent className="pt-3 md:pt-4 space-y-2 md:space-y-3">
             <div className="space-y-1">
-              <Label htmlFor="regex">Regular Expression</Label>
+              <Label htmlFor="regex" className="text-xs md:text-sm">Regular Expression</Label>
               <Input 
                 id="regex" 
                 placeholder="(a|b)*abb" 
                 value={regex} 
                 onChange={e => setRegex(e.target.value)}
-                className="font-code text-secondary"
+                className="font-code text-secondary text-xs md:text-sm"
               />
-              <p className="text-[10px] text-muted-foreground">Supported: a, b, |, *, +, ?, ( )</p>
+              <p className="text-[8px] md:text-[10px] text-muted-foreground">a, b, |, *, +, ?, ( )</p>
             </div>
             <Button 
-              className="w-full bg-secondary hover:bg-secondary/80 text-white font-bold" 
+              className="w-full bg-secondary hover:bg-secondary/80 text-white font-bold text-xs md:text-sm" 
               onClick={() => onRegexConvert(regex)}
             >
               Generate DFA
@@ -90,24 +90,24 @@ export function DfaEditor({
 
       <Separator className="bg-border" />
 
-      <section className="space-y-4">
-        <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Manual States</h3>
+      <section className="space-y-3 md:space-y-4">
+        <h3 className="text-xs md:text-sm font-semibold text-muted-foreground uppercase tracking-wider">Manual States</h3>
         <Card className="bg-background/50 border-border">
-          <CardContent className="pt-4 space-y-3">
-            <div className="grid grid-cols-2 gap-2">
+          <CardContent className="pt-3 md:pt-4 space-y-2 md:space-y-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
               <div className="space-y-1">
-                <Label htmlFor="sid">ID (e.g. q0)</Label>
-                <Input id="sid" placeholder="q0" value={newStateId} onChange={e => setNewStateId(e.target.value)} />
+                <Label htmlFor="sid" className="text-xs md:text-sm">ID</Label>
+                <Input id="sid" placeholder="q0" value={newStateId} onChange={e => setNewStateId(e.target.value)} className="text-xs md:text-sm" />
               </div>
               <div className="space-y-1">
-                <Label htmlFor="sl">Label</Label>
-                <Input id="sl" placeholder="Start" value={newStateLabel} onChange={e => setNewStateLabel(e.target.value)} />
+                <Label htmlFor="sl" className="text-xs md:text-sm">Label</Label>
+                <Input id="sl" placeholder="Start" value={newStateLabel} onChange={e => setNewStateLabel(e.target.value)} className="text-xs md:text-sm" />
               </div>
             </div>
             <div className="space-y-1">
-              <Label>Type</Label>
+              <Label className="text-xs md:text-sm">Type</Label>
               <Select value={newStateType} onValueChange={(v: any) => setNewStateType(v)}>
-                <SelectTrigger>
+                <SelectTrigger className="text-xs md:text-sm">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -118,21 +118,21 @@ export function DfaEditor({
                 </SelectContent>
               </Select>
             </div>
-            <Button className="w-full bg-primary hover:bg-primary/80 text-primary-foreground" onClick={handleAddState}>
-              <Plus className="w-4 h-4 mr-2" /> Add State
+            <Button className="w-full bg-primary hover:bg-primary/80 text-primary-foreground text-xs md:text-sm" onClick={handleAddState}>
+              <Plus className="w-3 md:w-4 h-3 md:h-4 mr-1" /> Add
             </Button>
           </CardContent>
         </Card>
 
-        <div className="max-h-48 overflow-y-auto space-y-2 pr-2">
+        <div className="max-h-40 md:max-h-48 overflow-y-auto space-y-1 md:space-y-2 pr-1 md:pr-2">
           {states.map(s => (
-            <div key={s.id} className="flex items-center justify-between p-2 rounded-md bg-muted/30 border border-border/50 group">
+            <div key={s.id} className="flex items-center justify-between p-1.5 md:p-2 rounded-md bg-muted/30 border border-border/50 group text-xs md:text-sm">
               <div className="flex flex-col w-full">
-                <span className="font-medium text-sm">{s.label || s.id}</span>
-                <span className="text-[10px] uppercase text-muted-foreground font-bold">{s.type.replace('_', ' & ')}</span>
+                <span className="font-medium">{s.label || s.id}</span>
+                <span className="text-[8px] md:text-[10px] uppercase text-muted-foreground font-bold">{s.type.replace('_', ' & ')}</span>
               </div>
-              <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-destructive opacity-0 group-hover:opacity-100 transition-opacity" onClick={() => onDeleteState(s.id)}>
-                <Trash2 className="w-4 h-4" />
+              <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-destructive opacity-0 group-hover:opacity-100 transition-opacity ml-1" onClick={() => onDeleteState(s.id)}>
+                <Trash2 className="w-3 md:w-4 h-3 md:h-4" />
               </Button>
             </div>
           ))}
@@ -141,24 +141,24 @@ export function DfaEditor({
 
       <Separator className="bg-border" />
 
-      <section className="space-y-4">
-        <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Transitions</h3>
+      <section className="space-y-3 md:space-y-4">
+        <h3 className="text-xs md:text-sm font-semibold text-muted-foreground uppercase tracking-wider">Transitions</h3>
         <Card className="bg-background/50 border-border">
-          <CardContent className="pt-4 space-y-3">
-            <div className="grid grid-cols-2 gap-2">
+          <CardContent className="pt-3 md:pt-4 space-y-2 md:space-y-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
               <div className="space-y-1">
-                <Label>From</Label>
+                <Label className="text-xs md:text-sm">From</Label>
                 <Select value={tSource} onValueChange={setTSource}>
-                  <SelectTrigger><SelectValue placeholder="Source" /></SelectTrigger>
+                  <SelectTrigger className="text-xs md:text-sm"><SelectValue placeholder="Source" /></SelectTrigger>
                   <SelectContent>
                     {states.map(s => <SelectItem key={s.id} value={s.id}>{s.id}</SelectItem>)}
                   </SelectContent>
                 </Select>
               </div>
               <div className="space-y-1">
-                <Label>To</Label>
+                <Label className="text-xs md:text-sm">To</Label>
                 <Select value={tTarget} onValueChange={setTTarget}>
-                  <SelectTrigger><SelectValue placeholder="Target" /></SelectTrigger>
+                  <SelectTrigger className="text-xs md:text-sm"><SelectValue placeholder="Target" /></SelectTrigger>
                   <SelectContent>
                     {states.map(s => <SelectItem key={s.id} value={s.id}>{s.id}</SelectItem>)}
                   </SelectContent>
@@ -166,23 +166,23 @@ export function DfaEditor({
               </div>
             </div>
             <div className="space-y-1">
-              <Label htmlFor="ts">Symbol (a or b)</Label>
-              <Input id="ts" maxLength={1} placeholder="a" value={tSymbol} onChange={e => setTSymbol(e.target.value.toLowerCase())} />
+              <Label htmlFor="ts" className="text-xs md:text-sm">Symbol (a or b)</Label>
+              <Input id="ts" maxLength={1} placeholder="a" value={tSymbol} onChange={e => setTSymbol(e.target.value.toLowerCase())} className="text-xs md:text-sm" />
             </div>
-            <Button className="w-full bg-accent hover:bg-accent/80 text-white" onClick={handleAddTransition}>
-              <Plus className="w-4 h-4 mr-2" /> Add Transition
+            <Button className="w-full bg-accent hover:bg-accent/80 text-white text-xs md:text-sm" onClick={handleAddTransition}>
+              <Plus className="w-3 md:w-4 h-3 md:h-4 mr-1" /> Add
             </Button>
           </CardContent>
         </Card>
 
-        <div className="max-h-48 overflow-y-auto space-y-2 pr-2">
+        <div className="max-h-40 md:max-h-48 overflow-y-auto space-y-1 md:space-y-2 pr-1 md:pr-2">
           {transitions.map((t, idx) => (
-            <div key={idx} className="flex items-center justify-between p-2 rounded-md bg-muted/30 border border-border/50 group">
-              <span className="text-sm font-code">
-                {t.source} <span className="text-primary mx-1">-- {t.symbol} --&gt;</span> {t.target}
+            <div key={idx} className="flex items-center justify-between p-1.5 md:p-2 rounded-md bg-muted/30 border border-border/50 group text-xs md:text-sm">
+              <span className="font-code truncate">
+                {t.source} <span className="text-primary mx-0.5 md:mx-1">--{t.symbol}--&gt;</span> {t.target}
               </span>
-              <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-destructive opacity-0 group-hover:opacity-100 transition-opacity" onClick={() => onDeleteTransition(t)}>
-                <Trash2 className="w-4 h-4" />
+              <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-destructive opacity-0 group-hover:opacity-100 transition-opacity ml-1" onClick={() => onDeleteTransition(t)}>
+                <Trash2 className="w-3 md:w-4 h-3 md:h-4" />
               </Button>
             </div>
           ))}

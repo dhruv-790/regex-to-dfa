@@ -82,11 +82,13 @@ export function DfaGraph({ states, currentStep, nodes, edges, onNodesChange, onE
       >
         <Background color="#26D94C" gap={20} style={{ opacity: 0.05 }} />
         <Controls className="fill-primary" />
-        <MiniMap 
-          nodeColor={(n) => n.data?.isActive ? '#26D94C' : '#BA4CFF'} 
-          maskColor="rgba(31, 46, 33, 0.8)"
-          className="bg-sidebar border border-border"
-        />
+        <div className="hidden md:block">
+          <MiniMap 
+            nodeColor={(n) => n.data?.isActive ? '#26D94C' : '#BA4CFF'} 
+            maskColor="rgba(31, 46, 33, 0.8)"
+            className="bg-sidebar border border-border"
+          />
+        </div>
       </ReactFlow>
     </div>
   );
