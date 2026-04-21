@@ -8,11 +8,17 @@ export const viewport: Viewport = {
   userScalable: true,
 };
 
-export const metadata: Metadata = {
-  title: 'DFA Studio',
-  description: 'Interactive DFA visualizer and educational automata tool.',
+export const metadata = {
+  title: "Regex to DFA Converter | Free Automata Tool",
+  description:
+    "Convert regular expressions to DFA instantly. Free online automata tool for students and developers.",
+  keywords: [
+    "regex to dfa",
+    "dfa converter",
+    "automata tool",
+    "regex to dfa online"
+  ],
 };
-
 export default function RootLayout({
   children,
 }: Readonly<{
